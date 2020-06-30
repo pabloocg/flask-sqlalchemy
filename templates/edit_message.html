@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+
+    <div class="container">
+        <h2>Edit Message</h2>
+        <form action="{{ url_for('messages', id_s=user.id, id_m=message.id)}}?_method=PATCH" method="POST" class="was-validated">
+        <div class="form-group">
+            <textarea class="form-control" rows="5" id="content" name="content" required>{{ message.content }}</textarea>
+            <div class="invalid-feedback">Please fill out this field.</div>
+        </div>
+        <button type="submit" class="btn btn-primary">Edit</button>
+        </form>
+    </div>
+
+{% endblock %}

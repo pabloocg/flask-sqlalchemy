@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+
+    <div class="container">
+        <ul class="nav nav-pills flex-column">
+            <li class="nav-item">
+              <a class="btn btn-primary" href="{{ url_for('index') }}">Home</a>
+            </li>
+        </ul>
+        <br>
+        <h2>Edit User Information</h2>
+        <form action="{{ url_for('show', id_s=user.id)}}?_method=PATCH" method="POST" class="was-validated" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="uname">First Name:</label>
+            <input type="text" class="form-control" id="fname" placeholder="Enter first name" name="first_name" value="{{user.first_name}}" required>
+            <div class="invalid-feedback">Please fill out this field.</div>
+        </div>
+        <div class="form-group">
+            <label for="pwd">Last Name:</label>
+            <input type="text" class="form-control" id="lname" placeholder="Enter last name" name="last_name" value="{{user.last_name}}" required>
+            <div class="invalid-feedback">Please fill out this field.</div>
+        </div>
+        <div class="form-group">
+            <label for="pwd">Profile picture:</label>
+            <br>
+            <input type="file" id="image" name="image_path" accept="image/jpg, image/png, image/jpeg"/>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-sm-4">
+          <ul class="nav nav-pills flex-column">
+            <li class="nav-item">
+              <a class="btn btn-primary" href="{{ url_for('index') }}">Home</a>
+            </li>
+          </ul>
+          <br>
+          <h2>About Me</h2>
+          <div>
+            {% if user.image_name == 'no_image' %}
+              <img src="../static/img/pred-photo.png" alt="avatar" class="mr-3 mt-3 rounded-circle" style="width:120px;">
+            {% else %}
+              <img src="../{{ user.image_name }}" alt="avatar" class="mr-3 mt-3 rounded-circle" style="width:120px;">
+            {% endif %}
+          </div>
+          <p>{{user.first_name}} {{user.last_name}}</p>
+          <form action="{{ url_for('new_message', id_s=user.id)}}" method="POST" class="was-validated">
+            <div class="form-group">
+                <label for="comment">New Message:</label>
+                <textarea class="form-control" rows="5" id="comment" name="content" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Send</button>
+          </form>
+          <hr class="d-sm-none">
+        </div>
+        <div class="col-sm-8">
+          <h5>Messages</h5>
+          <div class="table-responsive">
+            <table class="table table-bordered table-hover table-striped">
+              <thead class="thead-light">
+              <tr>
+                <th scope="col">Content</th>
+                <th scope="col">Options</th>
+              </tr>
+              </thead>
+              <tbody>
+                {% if messages|length == 0 %}
+                    <tr>
+                        <td>Empty</td>
+                        <th scope="row">#</th>
+                    </tr>
+                {% else %}
+                    {% for m in messages %}
+                <tr>
+                    <td>{{m.content}}</td>
+                    <td>
+                      <a href="{{ url_for('edit_message', id_s=user.id, id_m=m.id) }}"><i class="fas fa-edit icon-pad"></i></a>
+                      <a href="{{ url_for('messages', id_s=user.id, id_m=m.id) }}?_method=DELETE"><i class="fas fa-user-times" style="color:red;"></i></a>
+                    </td>
+                </tr>
+                {% endfor %}
+                {% endif %}
+              </tbody>
+            </table>
+          </div>
+          <br>
+        </div>
+      </div>
+
+
+
+</div>
+
+{% endblock %}

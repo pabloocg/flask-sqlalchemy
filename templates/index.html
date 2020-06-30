@@ -1,0 +1,102 @@
+
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container">
+	<div class="mx-auto col-sm-8 main-section" id="myTab" role="tablist">
+		<ul class="nav nav-tabs justify-content-end">
+			<li class="nav-item">
+			<a class="nav-link active" id="list-tab" data-toggle="tab" href="#list" role="tab" aria-controls="list" aria-selected="false">Users</a>
+			</li>
+			<li class="nav-item">
+			<a class="nav-link" id="form-tab" data-toggle="tab" href="#form" role="tab" aria-controls="form" aria-selected="true">Messages</a>				   	
+			</li>
+		</ul>
+		<div class="tab-content" id="myTabContent">
+			<div class="tab-pane fade show active" id="list" role="tabpanel" aria-labelledby="list-tab">
+				<div class="card">
+					<div class="card-header">
+                        <a href="{{ url_for('new') }}" class="btn btn-primary">New User</a>
+					</div>
+					<div class="card-body">
+						<div class="table-responsive">
+							<table id="userList" class="table table-bordered table-hover table-striped">
+								<thead class="thead-light">
+								<tr>
+									<th scope="col">#</th>
+									<th scope="col">First Name</th>
+									<th scope="col">Last Name</th>
+									<th scope="col">Options</th>
+								</tr>
+								</thead>
+								<tbody>
+                                    {% if users|length == 0 %}
+                                        <tr>
+                                            <th scope="row">#</th>
+                                            <td>Empty</td>
+											<th scope="row">#</th>
+											<th scope="row">#</th>
+                                        </tr>
+                                    {% else %}
+                                        {% for user in users %}
+                                        <tr>
+                                            <th scope="row">{{user.id}}</th>
+                                            <td>{{ user.first_name }}</td>
+                                            <td>{{ user.last_name }}</td>
+                                            <td class="center">
+                                                <a href="{{ url_for('show', id_s=user.id) }}"><i class="fas fa-user icon-pad"></i></a>
+                                                <a href="{{ url_for('edit', id_s=user.id) }}"><i class="fas fa-edit icon-pad"></i></a>
+                                                <a href="{{ url_for('show', id_s=user.id)}}?_method=DELETE"><i class="fas fa-user-times icon-pad" style="color:red;"></i></a>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    {% endif %}
+								</tbody>
+							</table>
+						</div>
+
+					</div>
+				</div>
+			</div>
+			<div class="tab-pane fade" id="form" role="tabpanel" aria-labelledby="form-tab">
+				<div class="card">
+					<div class="card-header">
+						<h4>Messages</h4>
+					</div>
+					<div class="card-body">
+						<div class="table-responsive">
+							<table id="userList" class="table table-bordered table-hover table-striped">
+								<thead class="thead-light">
+								<tr>
+									<th scope="col">#</th>
+									<th scope="col">Content</th>
+									<th scope="col">User</th>
+								</tr>
+								</thead>
+								<tbody>
+                                    {% if messages|length == 0 %}
+                                        <tr>
+                                            <th scope="row">#</th>
+                                            <td>Empty</td>
+                                            <th scope="row">#</th>
+                                        </tr>
+                                    {% else %}
+                                        {% for m in messages %}
+                                    <tr>
+                                        <th scope="row">{{m.id}}</th>
+                                        <td>{{m.content}}</td>
+                                        <td>{{m.user}}</td>
+                                    </tr>
+                                    {% endfor %}
+                                    {% endif %}
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,36 @@
+
+body {
+    background: url("../img/minimalist-background.jpg") no-repeat;
+    background-size: cover;
+}
+
+.main-section {
+    margin: 0;
+    margin-top: 5%;
+}
+
+.card {
+    Opacity:.95;
+    margin-bottom: 80px;
+}
+
+.card-body {
+    background-color: #d1d3d6;
+    box-shadow: 0px 0px 3px #cccbcb;
+}
+
+label {
+	font-weight: bold;
+}
+
+.nav-tabs .nav-item a:not(.active) {
+	background-color: #d1d3d6;
+}
+
+.nav-tabs {
+	border-bottom: 0px;
+}
+
+.icon-pad {
+    margin: 0px 10px;
+}
